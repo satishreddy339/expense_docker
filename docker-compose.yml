@@ -13,7 +13,9 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ExpenseApp@1
-      MYSQL_DATABASE: expensedb
+      MYSQL_DATABASE: transactions
+      MYSQL_USER: expense
+      MYSQL_PASSWORD: ExpenseApp@1
     ports:
       - "3306:3306"
     volumes:
@@ -25,19 +27,13 @@ services:
     container_name: backend
     restart: unless-stopped 
     volumes:
-      - backend_data:/var/lib/mysql
+      - backend_data:/opt/backend
     networks:
       - expense
     ports:
       - "8080:8080"
     depends_on:
       - mysql
-    environment:
-      - DB_HOST=mysql 
-      - DB_PORT=3306
-      - DB_NAME=expensedb
-      - DB_USER=root
-      - DB_PASSWORD=ExpenseApp@1
   frontend:
     image: expense-frontend
     container_name: frontend
