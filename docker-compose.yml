@@ -8,7 +8,7 @@ volumes:
   frontend_data:
 services:
   mysql:
-    image: mysql:8.0
+    image: expense-mysql
     container_name: mysql
     restart: unless-stopped
     environment:
@@ -21,7 +21,7 @@ services:
     networks:
       - expense
   backend:
-    image: backend
+    image: expense-backend
     container_name: backend
     restart: unless-stopped 
     volumes:
@@ -39,7 +39,7 @@ services:
       - DB_USER=root
       - DB_PASSWORD=ExpenseApp@1
   frontend:
-    image: frontend
+    image: expense-frontend
     container_name: frontend
     restart: unless-stopped
     volumes:
